@@ -49,20 +49,15 @@ def pick_label_that_exists(prefix, options):
     for opt in options:
         if f"{prefix}_{opt}" in FEATURES:
             return opt
-    # fallback: just return first option
+    # fallback: return first option
     return options[0]
 
-# -----------------------------
 # Determine what your model expects for Unknown casing
-# -----------------------------
 education_unknown_label = pick_label_that_exists("education", ["unknown", "Unknown"])
 contact_unknown_label   = pick_label_that_exists("contact",   ["unknown", "Unknown"])
 poutcome_unknown_label  = pick_label_that_exists("poutcome",  ["unknown", "Unknown"])
 
-
-# -----------------------------
-# UI inputs
-# -----------------------------
+# frontend user interface
 with st.expander("Numeric inputs", expanded=True):
     c1, c2 = st.columns(2)
 
@@ -88,7 +83,6 @@ with st.expander("Categorical inputs", expanded=True):
 
     marital = st.selectbox("marital", ["divorced", "married", "single"], index=1)
 
-    # use whatever your model expects: unknown or Unknown
     education = st.selectbox(
         "education",
         [education_unknown_label, "primary", "secondary", "tertiary"],
@@ -117,12 +111,10 @@ with st.expander("Categorical inputs", expanded=True):
         index=0
     )
 
-# -----------------------------
 # Build row (in training order)
-# -----------------------------
 row = make_blank_row()
 
-# numeric
+# numeric values
 row.at[0, "age"] = int(age)
 row.at[0, "balance"] = int(balance)
 row.at[0, "day"] = int(day)
@@ -132,7 +124,7 @@ row.at[0, "pdays"] = int(pdays)
 row.at[0, "previous"] = int(previous)
 row.at[0, "pdays_contacted"] = int(pdays_contacted)
 
-# one-hot
+# one-hot encode the new values
 set_one_hot(row, "job", job)
 set_one_hot(row, "marital", marital)
 set_one_hot(row, "education", education)
@@ -144,9 +136,7 @@ set_one_hot(row, "month", month)
 set_one_hot(row, "poutcome", poutcome)
 
 
-# -----------------------------
-# Predict
-# -----------------------------
+# Prediction using modal
 if st.button("Predict"):
     try:
         pred = model.predict(row)[0]
