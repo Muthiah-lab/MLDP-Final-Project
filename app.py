@@ -59,7 +59,7 @@ def set_one_hot(df, prefix, chosen_value):
     col_name = f"{prefix}_{chosen_value}"
     if col_name in df.columns:
         df.at[0, col_name] = 1
-        
+
 def pick_label_that_exists(prefix, options):
     """
     options = ["Unknown","unknown"] etc.
@@ -93,8 +93,8 @@ with st.expander("Numeric inputs", expanded=True):
 # expander means a div container
 with st.expander("Categorical inputs", expanded=True):
     job = st.selectbox("Job",["Admin.", "Blue-Collar", "Entrepreneur", "Housemaid", "Management","Retired", "Self-employed", "Services", "Student", "Technician", "Unemployed"],index=4)
-    marital = st.selectbox("Marital Status", ["Divorced", "Married", "Single"], index=1)
-    education = st.selectbox("Education",["Primary", "Secondary", "Tertiary"],index=3)
+    marital = st.selectbox("Marital Status", ["Unknown","Divorced", "Married", "Single"], index=1)
+    education = st.selectbox("Education",[education_unknown_label,"Primary", "Secondary", "Tertiary"],index=3)
     default = st.selectbox("Does the customer have credit?", ["No", "Yes"], index=0)
     housing = st.selectbox("Housing status?", ["No", "Yes"], index=0)
     loan = st.selectbox("Does the customer have a loan", ["No", "Yes"], index=0)
