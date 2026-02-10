@@ -137,11 +137,31 @@ if st.button("Predict"):
                 proba = float(p[0, 1])
         # display
         if str(pred) in ["1", "yes", "Yes", "YES", "True", "true"]:
-            st.success("✅ Prediction: Client WILL subscribe to term deposit")
+            st.markdown(
+                """
+                    <div style="background-color:#15803d; padding:15px;border-radius:10px;color:white;font-weight:bold;font-size:18px;">
+                        ✅ Prediction: Client WILL subscribe to term deposit
+                    </div>
+                """,
+                unsafe_allow_html=True
+            )
         else:
-            st.warning("❌ Prediction: Client will NOT subscribe to term deposit")
+            st.markdown(
+                """
+                    <div style="background-color:#dc2626; padding:15px;border-radius:10px;color:white;font-weight:bold;font-size:18px;">
+                        ❌ Prediction: Client will NOT subscribe to term deposit
+                    </div>
+                """,
+                unsafe_allow_html=True
+            )
         if proba is not None:
-            st.info(f"Probability of subscribing (class 1): **{proba:.4f}**")
+            st.markdown(
+                f"""
+                    <div style="background-color:#1e40af;padding:12px;border-radius:10px;color:white;font-size:16px;=font-weight:500;">
+                        Probability of subscribing (class 1): <b>{proba:.4f}</b>
+                    </div>
+                """, unsafe_allow_html=True
+            )            
     except Exception as e:
         st.error("Prediction failed.")
         st.code(str(e))
