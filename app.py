@@ -27,6 +27,7 @@ FEATURES = list(model.feature_names_in_)  # exact order from fit
 def make_blank_row():
     return pd.DataFrame([{col: 0 for col in FEATURES}])
 
+# converts all values into one hot encoded values
 def set_one_hot(df, prefix, chosen_value):
     """
     Sets df[f"{prefix}_{chosen_value}"]=1 if it exists.
@@ -142,8 +143,6 @@ set_one_hot(row, "contact", contact)
 set_one_hot(row, "month", month)
 set_one_hot(row, "poutcome", poutcome)
 
-st.subheader("Model input (exact columns + order used by training)")
-st.dataframe(row)
 
 # -----------------------------
 # Predict
