@@ -86,9 +86,9 @@ with st.expander("Numeric inputs", expanded=True):
     day = c1.number_input("Which day the client was contacted(the day of the month)?", min_value=1, max_value=31, value=5, step=1)
     duration = c2.number_input("How long did the call last(in seconds)?", min_value=0, value=261, step=1)
     campaign = c1.number_input("How many times the client was contacted?", min_value=0, value=1, step=1)
-    pdays = c2.number_input("Number of days passed after client was last contacted?", value=-1, step=1)
+    pdays = c2.number_input("Days since last contact (-1 means never contacted)", value=-1, step=1)
     previous = c1.number_input("How many times the customer was contacted previously?", min_value=0, value=0, step=1)
-    pdays_contacted = c2.number_input("Number of days passed after client was last contacted?", min_value=0, value=1, step=1)
+    pdays_contacted = c2.number_input("Has client been contacted before? (0 = No, 1 = Yes)?", min_value=0, value=1, step=1)
 
 # expander means a div container
 with st.expander("Categorical inputs", expanded=True):
